@@ -13,7 +13,7 @@ let message = [
     {
         role: "system",
         content: `You are a helpful AI Agent that helps people find information." Use the provided information to answer the question at the end. If the information does not contain the answer, respond with "I don't know."
-        Here is the information:  "Top 10 Horror Movies of All Time:
+        Here is the information:  "Top 10 Horror Movies of All Time: "Pull information from a credible source to list the top 10 horror movies of all time. Provide the titles, with any additional details or descriptions.
 "
         1) "Insidious":
         2) "The Conjuring":
@@ -39,14 +39,14 @@ while (info !== "exit") {
     };
     message.push(msg);
 
-    const result = await run(apiModel, message);
+    const data = await run(apiModel, message);
 
-    console.log("AI Response:", result.result.response);
+    console.log("AI Response:", data.result.response);
 
 }
 
 async function run(model, messages) {
-    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${apiAccount}/models/${model}/chat/completions`, {
+    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${apiAccount}/ai/run/${model}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
